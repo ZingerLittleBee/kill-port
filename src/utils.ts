@@ -1,6 +1,6 @@
-import { $, ProcessOutput, ProcessPromise } from 'zx';
+import { $, ProcessOutput } from 'zx';
 
-export function $withoutEscaping(pieces: TemplateStringsArray, ...args: unknown[]): ProcessPromise<ProcessOutput> {
+export function $withoutEscaping(pieces: TemplateStringsArray, ...args: unknown[]): Promise<ProcessOutput> {
     const origQuote = $.quote
     try {
         $.quote = unescapedCmd => unescapedCmd

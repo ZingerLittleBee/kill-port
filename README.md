@@ -7,4 +7,4 @@ Release port occupation
 3.	Press `Enter` to terminate the selected process.
 
 ## Snapshots
-![](./assets/screenshot.png)
+![](./metadata/screenshot.png)

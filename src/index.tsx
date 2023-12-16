@@ -79,7 +79,7 @@ export default function Command() {
               actions={
                 <ActionPanel>
                   <Action
-                    title="Select"
+                    title="Kill"
                     onAction={() => {
                       item.pid && killByPid(item.pid);
                     }}

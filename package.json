@@ -3,7 +3,7 @@
   "name": "kill-port",
   "title": "Kill Port",
   "description": "Release port occupation",
-  "icon": "command-icon.png",
+  "icon": "kill-port-icon.png",
   "author": "ZingerBee",
   "categories": [
     "Developer Tools"

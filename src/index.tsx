@@ -25,12 +25,15 @@ export default function Command() {
   }
 
   useEffect(() => {
-    let isMounted = true;
-    if (ports.length === 0) return;
+    if (ports.length === 0) {
+      if (processList.length > 0) {
+        setProcessList([]);
+      }
+      return;
+    }
     const fetchProcesses = async () => {
       const allProcesses = [];
       for (const p of ports) {
-        if (!p) continue;
         const port = parseInt(p);
         if (isNaN(port) || port < 0 || port > 65535) {
           await showToast({ title: "Only support input port number", style: Toast.Style.Failure  });
@@ -44,33 +47,24 @@ export default function Command() {
             const name = nameParts.join(' ');
             return { command, pid, user, fd, type, device, sizeOff, node, name };
           });
-  
           allProcesses.push(...data);
-        } catch (error) {
-          console.error(`Error fetching process for port ${port}:`, error);
+        } catch {
+          continue
         }
       }
-  
-      if (isMounted) {
-        setProcessList(allProcesses);
-      }
+      setProcessList(allProcesses);
     };
   
     fetchProcesses();
-  
-    return () => {
-      isMounted = false;
-    };
   }, [ports, refreshFlag]);
 
   return (
     <List
       searchText={input}
       onSearchTextChange={setInput}
-      navigationTitle=""
       searchBarPlaceholder="Input port your want kill, Enter to kill"
     >
-      {processList.length === 0 ? <List.EmptyView /> : processList.map((item, index) => {
+      {processList.length === 0 ? <List.EmptyView title={input ? `No process found on port ${input}` : 'Please input port or ports split by blank'} /> : processList.map((item, index) => {
         return <List.Item
           key={index}
           title={item.command ?? ''}

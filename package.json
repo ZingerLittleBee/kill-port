@@ -6,7 +6,9 @@
   "icon": "kill-port-icon.png",
   "author": "ZingerBee",
   "categories": [
-    "Developer Tools"
+    "Developer Tools",
+    "Productivity",
+    "System"
   ],
   "license": "MIT",
   "commands": [
